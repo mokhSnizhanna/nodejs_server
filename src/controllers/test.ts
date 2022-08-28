@@ -1,11 +1,13 @@
 import {IncomingMessage, ServerResponse}  from 'node:http';
 
-export function getHome(_req: IncomingMessage, _res: ServerResponse) {
-    _res.writeHead(200, { 'Content-Type': 'text/plain' });
-    _res.end('okay');
+export abstract class RouteProcess {
+    abstract process(_req: IncomingMessage, _res: ServerResponse):void 
 }
 
-export function getApiHome(_req: IncomingMessage, _res: ServerResponse) {
-    _res.writeHead(200, { 'Content-Type': 'text/plain' });
-    _res.end('api okay');
+export class TestController {
+    static getTest = class extends RouteProcess{
+        process(_req: IncomingMessage, _res: ServerResponse): void {
+            
+        }
+    }
 }

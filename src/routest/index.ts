@@ -4,11 +4,12 @@ import { api } from './api';
 import { web } from './web';
 import { MiddlewareInterface } from '../middleware'
 import { HttpError } from '../exceptions/HttpError';
+import { RouteProcess } from '../controllers/test';
 
 interface RouteInterface {
     method: string,
     path: string,
-    funс: any,
+    funс: RouteProcess,
     middlewares?: MiddlewareInterface[]
 }
 
@@ -31,7 +32,8 @@ function handleRequest(url: URL, _req: IncomingMessage, _res: ServerResponse) {
                 }
             }
             console.log('After middlewares')
-            route.funс(_req, _res);
+            // route.funс(_req, _res);
+            route.funс.process(_req, _res);
         } else {
             _res.writeHead(404, {'Content-Type': 'text/html'});
             _res.end('<h1>Not Found</h1>');
