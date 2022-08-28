@@ -4,21 +4,13 @@ import { api } from './api';
 import { web } from './web';
 import { MiddlewareInterface } from '../middleware'
 import { HttpError } from '../exceptions/HttpError';
-import { RouteProcess } from '../controllers/test';
+import BasicHttpController from '../controllers/BasicHttpController';
 
 interface RouteInterface {
     method: string,
     path: string,
-    funс: RouteProcess,
+    funс: BasicHttpController,
     middlewares?: MiddlewareInterface[]
-}
-
-interface TestInt {
-    method: string,
-}
-
-class Test implements TestInt {
-    method = '';
 }
 
 function handleRequest(url: URL, _req: IncomingMessage, _res: ServerResponse) {
@@ -26,13 +18,12 @@ function handleRequest(url: URL, _req: IncomingMessage, _res: ServerResponse) {
         const routes = [...api, ...web];
         const route = routes.find(r => r.path === url.pathname && r.method === _req.method);
         if (route) {
-            if (route.middlewares) {
-                for (let m of route.middlewares) {
-                    m.run(_req, _res);
-                }
-            }
+            // if (route.middlewares) {
+            //     for (let m of route.middlewares) {
+            //         m.run(_req, _res);
+            //     }
+            // }
             console.log('After middlewares')
-            // route.funс(_req, _res);
             route.funс.process(_req, _res);
         } else {
             _res.writeHead(404, {'Content-Type': 'text/html'});

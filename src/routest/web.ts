@@ -1,4 +1,3 @@
-// import {getHome} from '../controllers/test'
 import {RouteInterface} from './index'
 
 export const web: RouteInterface[] = [

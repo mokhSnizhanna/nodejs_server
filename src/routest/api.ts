@@ -1,4 +1,4 @@
-import {TestController} from '../controllers/test'
+import {TestController} from '../controllers/TestController'
 import {RouteInterface} from './index'
 import {AuthMiddleware} from '../middleware/AuthMiddleware'
 
